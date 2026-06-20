@@ -19,7 +19,7 @@ jobs:
 
       - name: Configure and Build ISO
         run: |
-          sudo lb config --mode debian --architecture amd64 --distribution bookworm --archive-areas "main contrib non-free non-free-firmware"
+          sudo lb config --mode debian --architecture amd64 --distribution bookworm --archive-areas "main contrib non-free non-free-firmware" --security false --updates false
           sudo lb build
 
       - name: Upload ISO Artifact
