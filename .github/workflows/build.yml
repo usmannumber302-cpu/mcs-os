@@ -8,19 +8,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: debian:bookworm
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y live-build debootstrap
+          apt-get update
+          apt-get install -y live-build sudo debootstrap
 
       - name: Configure and Build ISO
         run: |
-          sudo lb config --architecture amd64 --distribution bookworm --archive-areas "main contrib non-free non-free-firmware"
-          sudo lb build
+          lb config --architecture amd64 --distribution bookworm --archive-areas "main contrib non-free non-free-firmware"
+          lb build
 
       - name: Upload ISO Artifact
         uses: actions/upload-artifact@v4
